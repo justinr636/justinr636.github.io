@@ -1,0 +1,686 @@
+<!--
+ * Dashboard.html
+ *
+ * by Justin Ratra
+ */
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Northeastern University - NAS Dashboard</title>
+        <!--
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        -->
+        <meta name="viewport" content="width=device-width" />
+
+        <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="./css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+        <link href="./css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+        <link href="./css/charts.css" rel="stylesheet" type="text/css" />
+    	<link href="./css/plot.css" rel="stylesheet" type="text/css" />
+        <link href="./css/navmenu.css" rel="stylesheet" type="text/css" />
+
+        <script src="./js/jquery-1.11.2.min.js" type="text/javascript"></script>
+        <script src="./js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./js/bootstrap.js" type="text/javascript"></script>
+        <script src="./js/randomColor.min.js" type="text/javascript"></script>
+    	<script src="./js/underscore.js" type="text/javascript"></script>
+    	<script src="./js/underscore.math.js" type="text/javascript"></script>
+    	<script src="./js/Chart.js" type="text/javascript"></script>
+		<script src="./js/d3.v3.js" type="text/javascript"></script>
+		<script src="./js/box.js" type="text/javascript"></script>
+        <script src="./js/dashboard.js" type="text/javascript"></script>
+        <script src="./js/drawCharts.js" type="text/javascript"></script>
+        <script src="./js/jquery.PrintArea.js" type="text/javascript"></script>
+
+    	<style type="text/css">
+		    html { height: 100%; }
+			body { height: 100%; }
+
+			.tab { height: 100%; }
+			.hidden { display: none; }
+			.chart-container { margin-left: auto; margin-right: auto; }
+			svg:not(:root) { overflow: visible; }
+		</style>
+    </head>
+    <body>
+    <span id="hidden-span" style="display:none;"></span>
+<!-- Nav Bar Start -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div id="navbar-container" class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <a class="navbar-brand" href="#">
+                        <img id="navbar-brand-image" src="./img/NeoQIC_icon_126_59.gif" height="59" width="126" />
+                    </a>
+                    <ul id="navbar-items" class="nav navbar-nav">
+                        <li class="selected"><a href="#">Home</a></li>
+                        <li><a href="#">My Hospital Report</a></li>
+                        <li><a href="#">State Report</a></li>
+                        <li><a href="#">Customizable Charts</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="printBtn"><a href="#">Print Page</a></li>
+                    </ul>
+                </div> 
+            </div>     
+        </nav>
+<!-- Nav Bar End -->
+
+<!-- Home Tab Start -->
+        <div id="home-tab" class="container tab">
+			<div class="row">
+			    <div class="col-md-12">
+                    <h3>Upload a CSV File to Begin!</h3>
+                    <br />
+                    <input type="file" id="csvfile" />
+			    </div>
+			</div>
+			<div id="select-hid-row" class="row" style="display:none;">
+			    <div class="col-md-12">
+                    <h4>Select Your Hospital ID:</h4>
+                    <select id="hidSelect"></select>
+			    </div>
+			</div>
+    	        <!--
+
+    	    After uploading a file, 
+            if creating Local and Regional Dashboards fails (check if values are of right type)
+    	    ask the user to clarify certain columns.
+
+    	        -->
+    	</div>
+<!-- Home Tab End -->
+
+<!-- Local Tab Start -->
+        <div id="local-tab" class="container print-container tab">
+            <div class="row">
+    		    <div class="col-md-6">
+    		        <div class="chart-container">
+    					<div id="localChartDiv1" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		    <div class="col-md-6">
+    				<div class="chart-container">
+    					<div id="localChartDiv2" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		</div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+    		<div class="row">
+    		    <div class="col-md-6">
+    		        <div class="chart-container">
+    					<div id="localChartDiv3" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		    <div class="col-md-6">
+    			    <div class="chart-container">
+    					<div id="localChartDiv4" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		</div>
+    	</div>
+<!-- Local Tab End -->
+
+<!-- Regional Tab Start -->
+        <div id="regional-tab" class="container print-container tab">
+            <div class="row">
+    		    <div class="col-md-12">
+    		        <div class="chart-container">
+    					<div id="regionChartDiv1" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		</div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+    		<div class="row">
+    		    <div class="col-md-12">
+    		        <div class="chart-container">
+    					<div id="regionChartDiv2" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		</div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+    		<div class="row">
+    		    <div class="col-md-12">
+    		        <div class="chart-container">
+    					<div id="regionChartDiv3" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		</div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+    		<div class="row">
+    		    <div class="col-md-12">
+    		        <div class="chart-container">
+    					<div id="regionChartDiv4" class="chartDiv"></div>
+    				</div>
+    		    </div>
+    		</div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+    	</div>
+<!-- Regional Tab End -->
+
+<!-- Customize Tab Start -->
+        <div id="customize-tab" class="container tab" style="margin-bottom: 10px;">
+		    <div class="row">
+		        <div class="col-md-12">
+		            <br />
+		            <br />
+		        </div>
+		    </div>
+		    <div class="row">
+		        <div class="col-md-3">
+		            Select Chart Type:
+		        </div>
+		        <div class="col-md-3">
+		            Select Variable 1 (Y-Axis)
+		        </div>
+		        <div class="col-md-3">
+		            Select Variable 2 (X-Axis)
+		        </div>
+		        <div class="col-md-3">
+		        </div>
+		    </div>
+		    <!-- Select Chart Attributes Row -->
+		    <div class="row">
+		        <div class="col-md-3">
+		            <select id="chartTypeDrop" class="form-control">
+		                <option value="0">Select One</option>
+		                <option value="1">Run Chart</option>
+		                <option value="2">Box Plot</option>
+		                <option value="3">Funnel Plot</option>
+		                <option value="4">Bar Chart</option>
+		            </select>
+                    <div id="hidChecks">
+                    </div>
+		        </div>
+		        <div class="col-md-3">
+		            <select id="yDataDrop" class="form-control dataDrop">
+		                <option value="0">Select One</option>
+		            </select>
+                    <div id="indicatorDiv">
+                        Indicator Value:&emsp;<input id="indicatorText" type="text" />
+                    </div>
+		        </div>
+		        <div class="col-md-3">
+		            <select id="xDataDrop" class="form-control dataDrop">
+		                <option value="0">Select One</option>
+		            </select>
+		            <div id="multipleXData">
+		                <select id="xDataDrop2" class="form-control dataDrop" multiple>
+		            	</select>
+		            </div>
+		            <div id="dateXData">
+		                Start:&emsp;<input id="startDateText" type="text" class="date-text" /><br />
+		                End:&emsp;&nbsp;<input id="endDateText" type="text" class="date-text" /><br />
+		                &emsp;&emsp;&emsp;
+		                <input id="monthRadio" type="radio" name="date-radio" value="month" /> Month 
+		                &emsp;
+		                <input id="yearRadio" type="radio" name="date-radio" value="year" /> Year 
+		            </div>
+		        </div>
+		        <div class="col-md-3">
+		            <input type="submit" id="submitBtn" />
+		        </div>
+		    </div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+		    <!-- Enter Chart Labels Row -->
+		    <div class="row">
+		        <div class="col-md-3">
+		            <input id="chartTitleText" placeholder="Chart Title" class="form-control" />
+		        </div>
+		        <div class="col-md-3">
+		            <input id="yAxisTitleText" placeholder="Y-Axis Title" class="form-control" />
+		        </div>
+		        <div class="col-md-3">
+		            <input id="xAxisTitleText" placeholder="X-Axis Title" class="form-control" />
+		        </div>
+		    </div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+		    <div class="row print-container">
+		        <div class="col-md-12">
+		            <div id="custChartDiv"></div>
+		        </div>
+		    </div>
+    		<div class="row">
+    		    <br /><br />
+    		    <br /><br />
+    		</div>
+		</div>
+<!-- Customize Tab End -->
+
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        var $homeTab = $("#home-tab");
+	        var $localTab = $("#local-tab");
+	        var $regionalTab = $("#regional-tab");
+	        var $customizeTab = $("#customize-tab");
+
+	        var $tabs = [$homeTab, $localTab, $regionalTab, $customizeTab];
+
+	        $localTab.hide();
+	        $regionalTab.hide();
+	        $customizeTab.hide();
+
+	        //$("#select-hid-row").hide();
+
+	        // Handle Switching Tabs
+	        function switchTab(i) {
+	            for (var j = 0; j < 4; j++) {
+	                if (j == i) {
+	                    $("ul.nav > li:nth-child(" + (j + 1) + ")").addClass("selected");
+	                    $tabs[j].show();
+	                }
+	                else {
+	                    $("ul.nav > li:nth-child(" + (j + 1) + ")").removeClass("selected");
+	                    $tabs[j].hide();
+	                }
+	            }
+	        }
+
+	        // Handle Switching Tabs
+	        $("ul.nav > li:not(#printBtn)").click(function (e) {
+	            e.preventDefault();
+
+	            switchTab($(this).index());
+	        });
+
+	        var $chartTypeDrop = $("#chartTypeDrop");
+	        var $yDataDrop = $("#yDataDrop");
+	        var $xDataDrop = $("#xDataDrop");
+	        var $xDataDrop2 = $("#xDataDrop2");
+	        var $chartTitleText = $("#chartTitleText");
+	        var $xAxisTitleText = $("#xAxisTitleText");
+	        var $yAxisTitleText = $("#yAxisTitleText");
+
+	        function setHospitalId() {
+	            //var lastCol = 105;               // Validate and/or have Users validate this number
+	            var lastCol = global_hid_col;
+
+	            var title_html = '';
+	            var hid_check_html = '';
+
+	            _.each(csvArray, function (item) {
+	                var num = item[lastCol];
+	                var inList = $.inArray(num, allHids);
+	                if (inList == -1) {
+	                    allHids.push(num);
+
+                    var hids = $("#hidChecks input:checked");
+                       if (parseInt(num)) {
+	                        title_html += '<option value="' + num + '">' + num + '</option>';
+                            hid_check_html += '<input type="checkbox" value="' + num + '"/>' + num + '&emsp;';
+                       } else {
+	                        console.log("ERROR! Data Missing Hospital ID");
+                       }
+	                }
+	            });
+	            title_html = '<option value="0">I Do Not Know</option>' + title_html;
+                hid_check_html += '<input type="checkbox" value="0"/> AVG &emsp;';
+
+	            $("#hidSelect").html(title_html);
+	            $("#hidChecks").html(hid_check_html);
+
+	            $("#select-hid-row").show();
+	        }
+
+	        $("#hidSelect").change(function () {
+	            // hospitalID Select Change Handler --- (Possibly Create submit button to prevent accidental change)
+	            // -    Set Global Hospital ID  
+	            // -	Create Local and Regional Charts
+
+	            global_hid = parseInt($(this).val());
+
+	            $(".chartDiv").empty();
+
+	            var X_COL_MULT = [];
+	            var X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+	            var Y_COL = 77;     // Validate 77 = index of 'Length of Stay' column of CSV
+	            var HID_COL = 105;      // Validate 105 = index of 'Hospital ID' column of CSV
+
+	            // After Confirming Hospital ID and Date Column
+	            // Sort CSV by Date and Hospital ID
+	            csvArray.sort(dynamicSortMultiple([X_COL, HID_COL]));
+
+	            var END_DATE = new Date();
+	            var START_DATE = new Date();
+	            //START_DATE.setMonth(START_DATE.getMonth() - 6);
+	            START_DATE.setMonth(START_DATE.getMonth() - 12);
+
+	            // Local Report - Draw Avg Length of Stay vs Time - Run Chart
+                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: 0, hids: [global_hid] }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
+                             { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
+                             width / 2 - margin.left - margin.right,
+                             height / 2 - margin.top - margin.bottom,
+                             "div#localChartDiv1");
+                 
+	            Y_COL = 63;     // Validate 63 = index of 'Receiving Pharmacology Treatment' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+                                   
+	            // Local Report - Draw % Receiving Pharm Treatment Over Time - Run Chart
+                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: "Yes", hids: [global_hid] }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
+                             { yAxis: "Receiving Pharm Treatment (%)", xAxis: "", chartTitle: "% Patients Receiving Pharmacology Treatment Over Time (12 mo.)" },
+                             width / 2 - margin.left - margin.right,
+                             height / 2 - margin.top - margin.bottom,
+                             "div#localChartDiv2");
+                                   
+	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+                                   
+	            // Local Report - Draw % Receiving Brast Milk vs Time - Run Chart
+                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: "Yes", hids: [global_hid] }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
+                             { yAxis: "Receiving Breast Milk (%)", xAxis: "", chartTitle: "% Patients Receiving Breast Milk Over Time (12 mo.)" },
+                             width / 2 - margin.left - margin.right,
+                             height / 2 - margin.top - margin.bottom,
+                             "div#localChartDiv3");
+                                   
+	            Y_COL = 89;     // Validate 89 = index of 'Patients discharted with meds' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+                                   
+	            // Local Report - Draw % of Patients Discharged with Meds vs Time - Run Chart
+                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: "Yes", hids: [global_hid] }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
+                             { yAxis: "Discharged with Meds (%)", xAxis: "", chartTitle: "% Patients Discharged with Meds over Time (12 mo.)" },
+                             width / 2 - margin.left - margin.right,
+                             height / 2 - margin.top - margin.bottom,
+                             "div#localChartDiv4");
+
+                var hids = [global_hid, 0];     // 0 = calculate total average
+                                   
+	            Y_COL = 77;     // Validate 77 = index of 'Length of Stay' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+                                   
+	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
+                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: 0, hids: hids }, Y_COL, X_COL, [HID_COL], START_DATE, END_DATE),
+                             { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
+                             width - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv1");
+                                   
+	            Y_COL = 63;     // Validate 63 = index of 'Receiving Pharmacology Treatment' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Regional Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
+                drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: "Yes" }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
+                             width,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv2");
+
+	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Regional Report - Draw % Patients Receiving Breast Milk - Funnel Plot
+                drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: "Yes" }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk - Funnel Plot (All History)" },
+                             width,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv3");
+
+	            Y_COL = 89;     // Validate 89 = index of 'Patients discharted with meds' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Regional Report - Draw % Patients Discharged With Meds- Funnel Plot
+	            drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: "Yes" }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Patients Discharged with Meds (%)", xAxis: "Population", chartTitle: "% Patients Discharged with Medication - Funnel Plot (All History)" },
+                             width,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv4");
+                                   
+                /*
+	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+            // Draw Funnel Plot
+	            // Local Report - Draw % Patients Receiving Breast Milk - Funnel Plot
+	            drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: "Yes" }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk (during hospitalization) - Funnel Plot (All History)" },
+                             (2 * width / 3) - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#localChartDiv3");
+
+	            Y_COL = 77;      // Validate 77 = index of 'Length of Stay' column of CSV
+	            X_COL_MULT = [51, 52, 53, 54, 55, 56, 57];  // Validate 51-57 = index of 'Formula choices' columns of CSV
+	            //X_COL_MULT = [51, 52, 53, 54, 55, 56];  // Validate 51-57 = index of 'Formula choices' columns of CSV
+
+            // Draw Box and Whisker Plot
+	            // Local Report - Draw Length of Stay vs Feeding Method - Box and Whisker Plot
+                drawBoxPlot(customizeCSVData({ chartType: 3, byMonth: true }, Y_COL, X_COL_MULT, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Length of Stay (days)", xAxis: "Feeding Method", chartTitle: "Average Length of Stay vs Feeding Method" },
+                             (2 * width / 3) - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#localChartDiv4");
+                */
+
+                /*
+	            Y_COL = 77;     // Validate 77 = index of 'Length of Stay' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
+	            drawRunChart(customizeCSVData(1, Y_COL, X_COL, [HID_COL], START_DATE, END_DATE, true),
+                             { yAxis: "Length of Stay (# of days)", xAxis: "Date", chartTitle: "Length of Stay vs Time - Run Chart (6 mo.)" },
+                             width - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv1");
+                */
+
+                /*
+                // Working Bar Chart
+                 
+	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Regional Report - Draw % Patients Receiving Breast Milk - Bar Chart 
+	            drawBarChart(customizeCSVData(4, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
+                             { yAxis: "Receiving Breast Milk (%)", xAxis: "Date", chartTitle: "% Patients Receiving Breast Milk - Bar Chart" },
+                             width - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv2");
+                 
+	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Local Report - Draw % Patients Receiving Breast Milk - Funnel Plot
+	            drawFunnelPlot(customizeCSVData(3, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk (during hospitalization) - Funnel Plot (All History)" },
+                             width - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv2");
+                 */
+
+	            $("ul.nav li:nth-child(3)").click();
+	        });
+
+	        // Convert CSV data from fileupload to javascript object array
+	        $("#csvfile").change(function (e) {
+	            if (e.target.files != undefined) {
+	                var reader = new FileReader();
+
+	                reader.onload = function (e) {
+	                    var str = e.target.result;
+	                    csvArray = [];
+	                    csvArray = d3.csv.parseRows(str);
+
+	                    titles = csvArray[0];
+	                    csvArray.splice(0, 1);      // Remove labels from csv data set
+
+	                    // Add all CSV Column Names to DropDown menus
+	                    var title_html = '';
+	                    _.each(titles, function (item, i) {
+	                        title_html += '<option value="' + i + '">' + item + '</option>';
+	                    });
+	                    title_html = '<option value="">Select One</option>' + title_html;
+
+	                    $(".dataDrop").html(title_html);
+
+	                    setHospitalId();
+	                };
+
+	                reader.readAsText(e.target.files.item(0));
+	            }
+	        });
+
+	        // Click Print Button to Print the Report 
+	        $("#printBtn").click(function () {
+	            var index = $("ul.nav > li.selected").index();
+	            if (index == 1 || index == 2)
+	                $tabs[index].printArea();
+	            else
+	                $tabs[index].find(".print-container").printArea();
+
+	            return false;
+	        });
+
+            // Customize Tab - Chart Type Change event handler
+	        $chartTypeDrop.change(function () {
+	            // if selecting BoxPlot, show proper drop downs
+	            var val = parseInt($(this).val());
+
+	            if (val == 1) {
+	                $("#multipleXData").hide();
+	                $("#dateXData").show();
+                    $("#indicatorDiv").show();
+                    $("#hidChecks").show();
+	            } else if (val == 2) {
+	                $xDataDrop.hide();
+	                $("#multipleXData").show();
+	                $("#dateXData").hide();
+                    $("#indicatorDiv").hide();
+                    $("#hidChecks").hide();
+	            } else if (val == 3) {
+	                $("#multipleXData").hide();
+	                $("#dateXData").show();
+                    $("#indicatorDiv").show();
+                    $("#hidChecks").hide();
+	            } else if (val == 4) {
+	                $("#multipleXData").hide();
+	                $("#dateXData").show();
+                    $("#indicatorDiv").hide();
+                    $("#hidChecks").hide();
+	            } else {
+	                $("#multipleXData").hide();
+	                $("#dateXData").hide();
+                    $("#indicatorDiv").hide();
+                    $("#hidChecks").hide();
+	            }
+	        });
+                          
+	        $("#multipleXData").hide();
+	        $("#dateXData").hide();
+            $("#indicatorDiv").hide();
+            $("#hidChecks").hide();
+
+	        $("#startDateText").datepicker();
+	        $("#endDateText").datepicker();
+
+	        // Customize CSV Submit Button Handler
+	        $("#submitBtn").click(function (e) {
+	            e.preventDefault();
+                                  
+                var byMonth = true;
+                if ($("#yearRadio:checked").length > 0) byMonth = false;
+
+	            var chartType = parseInt($chartTypeDrop.val());
+	            $("#custChartDiv").empty();
+
+	            if (chartType == 1) {           // Draw Run Chart
+	                var Y_COL = $yDataDrop.val();
+	                var X_COL = $xDataDrop.val();
+                                  
+	                var HID_COL = global_hid_col;
+                                  
+	                var START_DATE = new Date($("#startDateText").val());
+	                var END_DATE = new Date($("#endDateText").val());
+                                  
+                    var hids = [];
+                    $("#hidChecks input:checked").each(function () {
+                         hids.push(parseInt($(this).val()));
+                    });
+                    if (hids.length > 1) HID_COL = [global_hid_col];
+                                  
+                    function isNumeric(n) { return !isNaN(parseFloat(n)) && isFinite(n); }
+                    
+                    var indicatorVal = $("#indicatorText").val();
+                    if (isNumeric(indicatorVal)) indicatorVal = parseInt(indicatorVal);
+                                  
+                    //console.log("hids = ", hids);
+                                  
+                    // Local Report - Draw % Receiving Pharm Treatment Over Time - Run Chart
+                    drawRunChart(customizeCSVData({ chartType: chartType, byMonth: byMonth, indicator: indicatorVal, hids: hids }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
+                                    { yAxis: $yAxisTitleText.val(), xAxis: $xAxisTitleText.val(), chartTitle: $chartTitleText.val() },
+                                    width - margin.left - margin.right,
+                                    height - margin.top - margin.bottom,
+                                    "div#custChartDiv");
+                                  
+	            } else if (chartType == 2) {    // Draw Box Plot
+	                var Y_COL = $yDataDrop.val();
+	                var X_COL_MULT = $xDataDrop2.val();
+	                var HID_COL = global_hid_col;
+	                var START_DATE = new Date($("#startDateText").val());
+	                var END_DATE = new Date($("#endDateText").val());
+
+	                // Customize Report - Box and Whisker Plot
+                    drawBoxPlot(customizeCSVData({ chartType: chartType, byMonth: true }, Y_COL, X_COL_MULT, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: $yAxisTitleText.val(), xAxis: $xAxisTitleText.val(), chartTitle: $chartTitleText.val() },
+                             width - margin.left - margin.right,
+                             height - margin.top - margin.bottom,
+                             "div#custChartDiv");
+                                  
+	            } else if (chartType == 3) {	// Draw Funnel Plot 
+	                var Y_COL = $yDataDrop.val();
+	                var X_COL = $xDataDrop.val();
+	                var HID_COL = global_hid_col;
+	                var START_DATE = new Date($("#startDateText").val());
+	                var END_DATE = new Date($("#endDateText").val());
+                    var indicatorVal = $("#indicatorText").val();
+                                  
+                    // Customize Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
+                    drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: indicatorVal }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: $yAxisTitleText.val(), xAxis: $xAxisTitleText.val(), chartTitle: $chartTitleText.val() },
+                             width,
+                             height - margin.top - margin.bottom,
+                             "div#custChartDiv");
+
+	            } else if (chartType == 4) {    // Draw Bar Chart
+	                var Y_COL = $yDataDrop.val();
+	                var X_COL = $xDataDrop.val();
+	                var HID_COL = global_hid_col;
+	                var START_DATE = new Date($("#startDateText").val());
+	                var END_DATE = new Date($("#endDateText").val());
+
+                    /*
+	                // Customize Report - Bar Chart 
+	                drawBarChart(customizeCSVData(chartType, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, byMonth),
+                	             { yAxis: $yAxisTitleText.val(), xAxis: $xAxisTitleText.val(), chartTitle: $chartTitleText.val() },
+                	             width - margin.left - margin.right,
+                	             height - margin.top - margin.bottom,
+                	             "div#custChartDiv");
+                    */
+	            }
+	        });
+
+	    });
+	</script>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+nav { background-image: #fff !important; }
+    #navbar-container { position: relative; }
+	    #navbar-container > * { position: relative; }
+	        .navbar-brand { position: relative; height: 59px; width: 126px; }
+	            #navbar-brand-image { position: absolute; top: 0px; left: -15px; }
+	        #navbar-items { position: absolute; left: 115px; }
+
+            ul.nav li { height: 59px; }
+                ul.nav li a { height: 100%; }
+            ul.nav li.selected  { background-image: -webkit-linear-gradient(top, #fff 0%, #ec7a08 100%); background-image: -moz-linear-gradient(top, #fff 0%, #ec7a08 100%); background-image: linear-gradient(top, #fff 0%, #ec7a08 100%); border-radius: 0px 0px 8px 8px; }
+                ul.nav li.selected a { color: Black; }
+            #printBtn { background-image: -webkit-linear-gradient(top, #fff 0%, #003591 100%); background-image: -moz-linear-gradient(top, #fff 0%, #003591 100%); background-image: linear-gradient(top, #fff 0%, #003591 100%); border-radius: 8px 8px 8px 8px; }
+            #printBtn > a { color: White; font-weight: bold; }
