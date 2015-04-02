@@ -202,8 +202,15 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	     	                 .scale(y)
 	     	   			     .orient("left");
     
-    var color = d3.scale.ordinal()
-	                      .range(randomColor({ count: data.length, hue: 'blue' }));
+    //var color = d3.scale.ordinal()
+	//                      .range(randomColor({ count: data.length, hue: 'blue' }));
+    var color = data.length;
+    if (color == 1)
+        color = d3.scale.ordinal().range(randomColor({ count: data.length, hue: 'blue' }));
+    else if (color == 2)
+        color = d3.scale.ordinal().range(["#ec7a08", "#2b39b5"]);
+    else
+        color = d3.scale.ordinal().range(randomColor({ count: data.length }));
 
     
     var svg = d3.select(selector).append("svg")
@@ -347,22 +354,42 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	                    .attr("text-anchor", "middle")
 	                    .style("font-size", '18px')
 	                    .text(label.chartTitle);
-
-    if (avg_line_bool) {
-        var legend = svg.selectAll(".legend")
-    			    .data(["My Hospital", "All Hospital's Average"])
-    			    .enter().append("g")
-    			    .attr("class", "legend")
-    			    .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
-
-        legend.append("rect")
-    			    .attr("x", width - 18)
-    			    .attr("y", 11)
-    			    .attr("width", 18)
-    			    .attr("height", 18)
-                    .style("fill", color);
-    			    //.style("fill", ["#4682b4", "#dc1e50"]);
-    			    //.style("fill", ["rgba(70, 130, 180, 1.0)", "rgba(220, 30, 80, 0.4)"]);
+    
+    if (data.length >= 2) {
+        var legend = svg;
+        
+        if (data.length > 2) {
+            legend = svg.selectAll(".legend")
+    	    		    .data(hids)
+    	    		    .enter().append("g")
+    	    		    .attr("class", "legend")
+    	    		    .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+            
+            legend.append("rect")
+    	    		    .attr("x", width - 18)
+    	    		    .attr("y", 11)
+    	    		    .attr("width", 18)
+    	    		    .attr("height", 18)
+            .style("fill", function (d, i) { console.log("color(i / (hids.length - 1))"); return color(i / (hids.length - 1)); });
+                        //.style("fill", color(i / (data.length - 1)));
+    	    		    //.style("fill", ["#4682b4", "#dc1e50"]);
+    	    		    //.style("fill", ["rgba(70, 130, 180, 1.0)", "rgba(220, 30, 80, 0.4)"]);
+        } else {
+            legend = svg.selectAll(".legend")
+    	    		    .data(["My Hospital", "All Hospital's Average"])
+    	    		    .enter().append("g")
+    	    		    .attr("class", "legend")
+    	    		    .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+            
+            legend.append("rect")
+    	    		    .attr("x", width - 18)
+    	    		    .attr("y", 11)
+    	    		    .attr("width", 18)
+    	    		    .attr("height", 18)
+                        .style("fill", color);
+    	    		    //.style("fill", ["#4682b4", "#dc1e50"]);
+    	    		    //.style("fill", ["rgba(70, 130, 180, 1.0)", "rgba(220, 30, 80, 0.4)"]);
+        }
 
         legend.append("text")
                     //.attr("x", width - 24)
@@ -373,7 +400,7 @@ function drawRunChart(dataObj, label, width, height, selector) {
     			    .style("text-anchor", "end")
     			    .text(function (d) { return d; });
     }
-    
+
     $(selector + " g.x g.tick text").map(function () {
         // translation formula 1:
         // y = 0.4932x + 11.422
@@ -675,7 +702,7 @@ function drawFunnelPlot(data, title, width, height, selector) {
        .attr("x2", xScale(max_x))
        .attr("y2", yScale(mean_incidence_rate))
        .style("stroke", "rgba(6, 120, 155, 0.6)")
-       .style("stroke-width", 1)
+       .style("stroke-width", 2)
        .on("mouseover", function (d, i) {
            $('div.tooltip').show();
            tooltip.transition().duration(100).style("opacity", 1);
@@ -693,7 +720,14 @@ function drawFunnelPlot(data, title, width, height, selector) {
        .data(dataset)
        .enter()
        .append("circle")
-       .attr("fill", function (d) { return (d['hid'] == global_hid ? "rgba(236, 122, 8, 0.75)" : "rgba(22, 68, 81, 0.6)"); })
+       //.attr("fill", function (d) { return (d['hid'] == global_hid ? "rgba(236, 122, 8, 0.75)" : "rgba(22, 68, 81, 0.6)"); })
+       .attr("fill", function (d) {
+             var val = d['ratio'];
+             if (d['hid'] == global_hid) return "rgba(236, 122, 8, 0.75)";
+             else if (val > d['plus_3sd'] || val < d['minus_3sd']) return "rgba(255, 0, 0, 0.75)";
+             else if (val > d['plus_2sd'] || val < d['minus_2sd']) return "rgba(205, 0, 0, 0.75)";
+             else return "rgba(22, 68, 81, 0.6)";
+       })
        .attr("cx", function (d) {
            return xScale(d['sample_size']);
        })
@@ -942,7 +976,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
         if (lcl < 0) lcl = 0;       // assumes lcl cannot be negative
 
         // Sort data by date
-        //console.log("run chart dataset = ", dataset);
+        console.log("run chart dataset = ", dataset);
         //dataset = _.sortBy(dataset, function (o) { var dt = new Date(o.date); return dt; });
 
         return { data: dataset, avg: avg, ucl: ucl, lcl: lcl, avg_line: avg_line, max: max, min: min, hids: hids  };
@@ -1054,6 +1088,8 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
             item['plus_3sd'] = mean_incidence_rate + (3 * item['std_error']);
             item['minus_3sd'] = mean_incidence_rate - (3 * item['std_error']);
         });
+        
+        //console.log("funnelData = ", funnelData);
 
         return { data: funnelData, names: sorted_names, rate: mean_incidence_rate };
     } else if (chartType == 4) {    // Draw Bar Chart
