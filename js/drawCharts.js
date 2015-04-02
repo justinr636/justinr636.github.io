@@ -976,7 +976,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
         if (lcl < 0) lcl = 0;       // assumes lcl cannot be negative
 
         // Sort data by date
-        console.log("run chart dataset = ", dataset);
+        //console.log("run chart dataset = ", dataset);
         //dataset = _.sortBy(dataset, function (o) { var dt = new Date(o.date); return dt; });
 
         return { data: dataset, avg: avg, ucl: ucl, lcl: lcl, avg_line: avg_line, max: max, min: min, hids: hids  };
