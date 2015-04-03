@@ -4,7 +4,8 @@ var height = 500;
 
 var csvArray = [];  // Stores CSV
 var titles = [];    // Stores CSV Column Headers
-var allHids = [];   // Stores Unique Hospital IDs 
+var allHids = [];   // Stores Unique Hospital IDs
+var chartOptions = [];
 
 var global_hid = 0;
 var global_hid_col = 105;
