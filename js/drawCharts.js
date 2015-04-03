@@ -19,7 +19,7 @@ function DateToString2(d) {
 }
 
 function DateToString3(d) {
-    return ((d.getMonth() + 1) + "/" + d.getDay() + "/" + d.getFullYear());
+    return ((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear());
 }
 
 function drawBarChart(barData, titles, width, height, selector) {
@@ -856,7 +856,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
             //var val = parseInt(item[Y_COL]);  -This assumes item[Y_COL] (y-axis) = number (not "Yes" or "Checked")
             var val = 0;
             if (Y_COL == 77) {
-               val = parseInt(item[Y_COL]) - parseInt(item[7]);
+               val = parseInt(item[Y_COL]) - parseInt(item[7]);     // Assumes item[77] = Day of Life at discharge, item[7] = Day of Life at admission
             } else {
                val = item[Y_COL];
             }
@@ -887,9 +887,12 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
                
                if (typeof indicatorVal === "number") {
                     var num = parseInt(val);
+                    //console.log("num = ", num);
                
                     if (hospIndex !== -1) {
                         dataset[hospIndex][dateIndex].vals.push(num);
+                        //dataset[hospIndex][dateIndex].avg_sum += num;
+                        //dataset[hospIndex][dateIndex].avg_count++;
                     }
                
                     if (avg_line) {
@@ -933,6 +936,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
                         var size = o.vals.length;
                          
                         _.each(o.vals, function (item) {
+                            //console.log("o.vals item = ", item);
                             variance_sum += ((item - avg) * (item - avg));
                             current_sum += item;
                             
@@ -989,7 +993,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
         //console.log("run chart dataset = ", dataset);
         //dataset = _.sortBy(dataset, function (o) { var dt = new Date(o.date); return dt; });
 
-        return { data: dataset, avg: avg, ucl: ucl, lcl: lcl, avg_line: avg_line, max: max, min: min, hids: hids  };
+        return { data: dataset, avg: avg, ucl: ucl, lcl: lcl, avg_line: avg_line, max: max, min: min, hids: hids, stdev: stdev  };
 
     } else if (chartType == 2) {    // Draw Box Plot 
         var dataset = [];

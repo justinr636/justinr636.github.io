@@ -47,7 +47,8 @@
 		</style>
     </head>
     <body>
-    <span id="hidden-span" style="display:none;"></span>
+        <div id="#main">
+        <span id="hidden-span" style="display:none;"></span>
 <!-- Nav Bar Start -->
         <nav class="navbar navbar-default" role="navigation">
             <div id="navbar-container" class="container-fluid">
@@ -68,6 +69,16 @@
             </div>     
         </nav>
 <!-- Nav Bar End -->
+
+<!-- Footer Start -->
+        <footer class="footer">
+            <div class="footer-container container">
+                <a href="#">
+                    <img id="footer-brand-image" src="./img/HSyE_icon_full.png" height="60" width="417" />
+                </a>
+            </div>
+        </footer>
+<!-- Footer End -->
 
 <!-- Home Tab Start -->
         <div id="home-tab" class="container tab">
@@ -99,6 +110,7 @@
     	    ask the user to clarify certain columns.
 
     	        -->
+            <div class="bottom-div"></div>
     	</div>
 <!-- Home Tab End -->
 
@@ -114,6 +126,7 @@
                             Start: <input class="date-toggle-start" type="text" />
                             &emsp;
                             End: <input class="date-toggle-end" type="text" />
+                            &emsp;
                             <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
                         </div>
     				</div>
@@ -127,6 +140,7 @@
                             Start: <input class="date-toggle-start" type="text" />
                             &emsp;
                             End: <input class="date-toggle-end" type="text" />
+                            &emsp;
                             <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
                         </div>
     				</div>
@@ -146,6 +160,7 @@
                             Start: <input class="date-toggle-start" type="text" />
                             &emsp;
                             End: <input class="date-toggle-end" type="text" />
+                            &emsp;
                             <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
                         </div>
     				</div>
@@ -159,33 +174,45 @@
                             Start: <input class="date-toggle-start" type="text" />
                             &emsp;
                             End: <input class="date-toggle-end" type="text" />
+                            &emsp;
                             <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
                         </div>
     				</div>
     		    </div>
     		</div>
+            <div class="bottom-div"></div>
     	</div>
 <!-- Local Tab End -->
 
 <!-- Regional Tab Start -->
         <div id="regional-tab" class="container print-container tab">
             <div class="row">
-    		    <div class="col-md-12">
+    		    <div class="col-md-6">
     		        <div class="chart-container">
                         <input class="chart-options-index" type="hidden" value="4" />
     					<div id="regionChartDiv1" class="chartDiv"></div>
+                        <br /><br />
+                        <div class="date-toggle">
+                            Start: <input class="date-toggle-start" type="text" />
+                            &emsp;
+                            End: <input class="date-toggle-end" type="text" />
+                            &emsp;
+                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                        </div>
     				</div>
     		    </div>
-    		</div>
-    		<div class="row">
-    		    <br /><br />
-    		    <br /><br />
-    		</div>
-    		<div class="row">
-    		    <div class="col-md-12">
+    		    <div class="col-md-6">
     		        <div class="chart-container">
                         <input class="chart-options-index" type="hidden" value="5" />
     					<div id="regionChartDiv2" class="chartDiv"></div>
+                        <br /><br />
+                        <div class="date-toggle">
+                            Start: <input class="date-toggle-start" type="text" />
+                            &emsp;
+                            End: <input class="date-toggle-end" type="text" />
+                            &emsp;
+                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                        </div>
     				</div>
     		    </div>
     		</div>
@@ -194,29 +221,36 @@
     		    <br /><br />
     		</div>
     		<div class="row">
-    		    <div class="col-md-12">
+    		    <div class="col-md-6">
     		        <div class="chart-container">
                         <input class="chart-options-index" type="hidden" value="6" />
     					<div id="regionChartDiv3" class="chartDiv"></div>
+                        <br /><br />
+                        <div class="date-toggle">
+                            Start: <input class="date-toggle-start" type="text" />
+                            &emsp;
+                            End: <input class="date-toggle-end" type="text" />
+                            &emsp;
+                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                        </div>
     				</div>
     		    </div>
-    		</div>
-    		<div class="row">
-    		    <br /><br />
-    		    <br /><br />
-    		</div>
-    		<div class="row">
-    		    <div class="col-md-12">
+    		    <div class="col-md-6">
     		        <div class="chart-container">
                         <input class="chart-options-index" type="hidden" value="7" />
     					<div id="regionChartDiv4" class="chartDiv"></div>
+                        <br /><br />
+                        <div class="date-toggle">
+                            Start: <input class="date-toggle-start" type="text" />
+                            &emsp;
+                            End: <input class="date-toggle-end" type="text" />
+                            &emsp;
+                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                        </div>
     				</div>
     		    </div>
     		</div>
-    		<div class="row">
-    		    <br /><br />
-    		    <br /><br />
-    		</div>
+            <div class="bottom-div"></div>
     	</div>
 <!-- Regional Tab End -->
 
@@ -350,9 +384,11 @@
     		    <br /><br />
     		    <br /><br />
     		</div>
+            <div class="bottom-div"></div>
 		</div>
 <!-- Customize Tab End -->
 
+    </div>
 	<script type="text/javascript">
 	    $(document).ready(function () {
 	        var $homeTab = $("#home-tab");
@@ -368,6 +404,9 @@
 
 	        //$("#select-hid-row").hide();
 
+            //var docHeight = $tabs[0].find(".bottom-div").position().top;
+            //$('footer').css('top', 10+docHeight + 'px');
+            
 	        // Handle Switching Tabs
 	        function switchTab(i) {
 	            for (var j = 0; j < 4; j++) {
@@ -380,6 +419,10 @@
 	                    $tabs[j].hide();
 	                }
 	            }
+                
+                //docHeight = $tabs[i].find(".bottom-div").position().top;
+                //$('footer').css('top', 10+docHeight + 'px');
+                //console.log("docHeight = ", docHeight);
 	        }
 
 	        // Handle Switching Tabs
@@ -472,7 +515,9 @@
 	            // -	Create Local and Regional Charts
 	            global_hid = parseInt($(this).val());
                 START_DATE = new Date($homeTab.find(".date-toggle-start").val());
+                START_DATE.setHours(0, 0, 0, 0);
                 END_DATE = new Date($homeTab.find(".date-toggle-end").val());
+                END_DATE.setHours(23, 59, 59, 999);
                 
 	            $(".chartDiv").empty();
                 chartOptions.length = 0;
@@ -615,38 +660,6 @@
                 
                 // Store all data to redraw chart if date is changed.
                 chartOptions.push({
-                    options: { chartType: 1, byMonth: true, indicator: 0, hids: hids },
-                    Y_COL: 77,
-                    X_COL: 1,
-                    HID_COL: [HID_COL],
-                    START_DATE: START_DATE,
-                    END_DATE: END_DATE,
-                    titles: { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
-                    width: width,
-                    height: (2 * height) / 3 - margin.top - margin.bottom,
-                    selector: "div#regionChartDiv1"
-                });
-                
-                opts = chartOptions[4];
-                
-	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
-                drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
-                             opts.titles, opts.width, opts.height, opts.selector);
-                             
-                /*
-	            Y_COL = 77;     // Validate 77 = index of 'Length of Stay' column of CSV
-	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
-                                   
-	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
-                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: 0, hids: hids }, Y_COL, X_COL, [HID_COL], START_DATE, END_DATE),
-                             { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
-                             width - margin.left - margin.right,
-                             (2 * height / 3) - margin.top - margin.bottom,
-                             "div#regionChartDiv1");
-                */
-                
-                // Store all data to redraw chart if date is changed.
-                chartOptions.push({
                     options: { chartType: 3, byMonth: true, indicator: "Yes" },
                     Y_COL: 63,
                     X_COL: 1,
@@ -654,12 +667,12 @@
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
                     titles: { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
-                    width: width,
-                    height: (2 * height) / 3 - margin.top - margin.bottom,
-                    selector: "div#regionChartDiv2"
+                    width: width / 2 + margin.left,
+                    height: (3 * height) / 4 - margin.top - margin.bottom,
+                    selector: "div#regionChartDiv1"
                 });
                 
-                opts = chartOptions[5];
+                opts = chartOptions[4];
                 
 	            // Regional Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
                 drawFunnelPlot(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
@@ -674,9 +687,41 @@
                              { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
                              width,
                              (2 * height / 3) - margin.top - margin.bottom,
-                             "div#regionChartDiv2");
+                             "div#regionChartDiv1");
                 */
 
+                // Store all data to redraw chart if date is changed.
+                chartOptions.push({
+                    options: { chartType: 1, byMonth: true, indicator: 0, hids: hids },
+                    Y_COL: 77,
+                    X_COL: 1,
+                    HID_COL: [HID_COL],
+                    START_DATE: START_DATE,
+                    END_DATE: END_DATE,
+                    titles: { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
+                    width: width / 2,
+                    height: (2 * height) / 3 - margin.top - margin.bottom,
+                    selector: "div#regionChartDiv2"
+                });
+                
+                opts = chartOptions[5];
+                
+	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
+                drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
+                             opts.titles, opts.width, opts.height, opts.selector);
+                             
+                /*
+	            Y_COL = 77;     // Validate 77 = index of 'Length of Stay' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+                                   
+	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
+                drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: 0, hids: hids }, Y_COL, X_COL, [HID_COL], START_DATE, END_DATE),
+                             { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
+                             width - margin.left - margin.right,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv2");
+                */
+                
                 // Store all data to redraw chart if date is changed.
                 chartOptions.push({
                     options: { chartType: 3, byMonth: true, indicator: "Yes" },
@@ -686,8 +731,8 @@
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
                     titles: { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk - Funnel Plot (All History)" },
-                    width: width,
-                    height: (2 * height) / 3 - margin.top - margin.bottom,
+                    width: width / 2 + margin.left,
+                    height: (3 * height) / 4 - margin.top - margin.bottom,
                     selector: "div#regionChartDiv3"
                 });
                 
@@ -718,8 +763,8 @@
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
                     titles: { yAxis: "Patients Discharged with Meds (%)", xAxis: "Population", chartTitle: "% Patients Discharged with Medication - Funnel Plot (All History)" },
-                    width: width,
-                    height: (2 * height) / 3 - margin.top - margin.bottom,
+                    width: width / 2 + margin.left,
+                    height: (3 * height) / 4 - margin.top - margin.bottom,
                     selector: "div#regionChartDiv4"
                 });
                 
@@ -744,6 +789,10 @@
                 $(".chart-options-index").each(function () {
                     var index = parseInt($(this).val());
                     var $date = $(this).closest('.chart-container').find('.date-toggle');
+                    //console.log("START_DATE = ", START_DATE);
+                    //console.log("END_DATE = ", END_DATE);
+                    //console.log("string, START_DATE = ", DateToString3(START_DATE));
+                    //console.log("string, END_DATE = ",   DateToString3(END_DATE));
                     $date.find('.date-toggle-start').val(DateToString3(chartOptions[index].START_DATE));
                     $date.find('.date-toggle-end').val(DateToString3(chartOptions[index].END_DATE));
                 });
@@ -953,7 +1002,9 @@
                 var $chartContainer = $(this).closest('.chart-container');
                 var chartIndex = $chartContainer.find('.chart-options-index').val();
                 var START_DATE = new Date($chartContainer.find('.date-toggle-start').val());
+                START_DATE.setHours(0, 0, 0, 0);
                 var END_DATE = new Date($chartContainer.find('.date-toggle-end').val());
+                END_DATE.setHours(23, 59, 59, 999);
                 
                 chartOptions[chartIndex].START_DATE = START_DATE;
                 chartOptions[chartIndex].END_DATE = END_DATE;
@@ -961,10 +1012,17 @@
                 $chartContainer.find(".chartDiv").empty();
                 
                 var opts = chartOptions[chartIndex];
+                var chartType = chartOptions[chartIndex].options.chartType;
                 
-	            // Local Report - Draw % of Patients Discharged with Meds vs Time - Run Chart
-                drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
+                if (chartType == 1) {           // Draw Run Chart
+                    drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                              opts.titles, opts.width, opts.height, opts.selector);
+                } else if (chartType == 2) {    // Draw Box Plot
+                } else if (chartType == 3) {    // Draw Funnel Plot
+                    drawFunnelPlot(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
+                               opts.titles, opts.width, opts.height, opts.selector);
+                } else if (chartType == 4) {    // Draw Bar Chart
+                }
             });
                           
 	        // Customize CSV Submit Button Handler
