@@ -62,6 +62,8 @@ function drawBarChart(barData, titles, width, height, selector) {
     var svg = d3.select(selector).append("svg")
 			            .attr("width", width + margin.left + margin.right)
 			    		.attr("height", height + margin.top + margin.bottom)
+                        .attr("viewBox", "0 0 " + (width+margin.left+margin.right) + " " + (height+margin.top+margin.bottom))
+	     	   	        .attr("preserveAspectRatio", "xMidYMid")
 			    		.append("g")
 			    		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -137,6 +139,7 @@ function drawBarChart(barData, titles, width, height, selector) {
 	            .attr("y", 0 - (margin.top / 2))
 	            .attr("text-anchor", "middle")
 	            .style("font-size", '18px')
+                .style("font-weight", "bold")
 	            .text(titles.chartTitle);
 
     var legend = svg.selectAll(".legend")
@@ -224,6 +227,8 @@ function drawRunChart(dataObj, label, width, height, selector) {
     var svg = d3.select(selector).append("svg")
 	     	                .attr("width", width + margin.left + margin.right)
 	     	   	    		.attr("height", height + margin.top + margin.bottom)
+	     	   	    		.attr("viewBox", "0 0 " + (width+margin.left+margin.right) + " " + (height+margin.top+margin.bottom))
+	     	   	    		.attr("preserveAspectRatio", "xMidYMid")
 	     	   				.append("g")
 	     	   				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
@@ -268,7 +273,8 @@ function drawRunChart(dataObj, label, width, height, selector) {
                    .attr('y', 30)
                    .attr('dy', '.71em')
                    .style('text-anchor', 'middle')
-                   .style('font-size', '14px')
+                   //.style('font-size', '14px')
+                   .style('font-size', '11px')
                    .text(label.xAxis);
 
     // draw y-axis
@@ -281,7 +287,8 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	      		   .attr("x", -(height / 4))
 	      		   .attr("dy", ".71em")
 	      		   .style("text-anchor", "end")
-                   .style('font-size', '14px')
+                   //.style('font-size', '14px')
+                   .style('font-size', '11px')
 	      		   .text(label.yAxis);
     
     // Draw center line to indicate mean.
@@ -345,7 +352,7 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	    		   .attr({ x1: 0, y1: y(ucl), x2: width, y2: y(ucl) });
     svg.append("text")
 	               .attr({ x: width + 5, y: y(ucl) + 4 })
-	    		   .text("Upper Limit: " + ucl.toFixed(2));
+	    		   .text("UCL: " + ucl.toFixed(2));
 
     // lower limit line
     svg.append("line")
@@ -353,14 +360,16 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	    		   .attr({ x1: 0, y1: y(lcl), x2: width, y2: y(lcl) });
     svg.append("text")
 	               .attr({ x: width + 5, y: y(lcl) + 4 })
-	    		   .text("Lower Limit: " + lcl.toFixed(2));
+	    		   .text("LCL: " + lcl.toFixed(2));
 
     // draw title
     svg.append('text')
 	                    .attr("x", width / 2)
 	                    .attr("y", 0 - (margin.top / 2))
 	                    .attr("text-anchor", "middle")
-	                    .style("font-size", '18px')
+	                    //.style("font-size", '18px')
+	                    .style("font-size", "14px")
+	                    .style("font-weight", "bold")
 	                    .text(label.chartTitle);
     
     if (data.length >= 2) {
@@ -384,7 +393,7 @@ function drawRunChart(dataObj, label, width, height, selector) {
     	    		    //.style("fill", ["rgba(70, 130, 180, 1.0)", "rgba(220, 30, 80, 0.4)"]);
         } else {
             legend = svg.selectAll(".legend")
-    	    		    .data(["My Hospital", "All Hospital's Average"])
+    	    		    .data([global_hid, "AVG"])
     	    		    .enter().append("g")
     	    		    .attr("class", "legend")
     	    		    .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
@@ -459,6 +468,8 @@ function drawBoxPlot(boxData, title, width, height, selector) {
                 .append("svg")
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
+	     	   	.attr("viewBox", "0 0 " + (width+margin.left+margin.right) + " " + (height+margin.top+margin.bottom))
+	     	   	.attr("preserveAspectRatio", "xMidYMid")
                 .attr('class', 'box')
                 .append('g')
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -492,7 +503,8 @@ function drawBoxPlot(boxData, title, width, height, selector) {
             .attr("x", width / 2)
             .attr("y", 0 + (margin.top / 2))
             .attr("text-anchor", "middle")
-            .style("font-size", '18px')
+            .style("font-size", "16px")
+            .style("font-weight", "bold")
             .text(title.chartTitle);
 
     // draw y-axis
@@ -583,6 +595,9 @@ function drawFunnelPlot(data, title, width, height, selector) {
     var svg = d3.select(selector).append("svg")
             	            .attr("width", width)
             	            .attr("height", height)
+	     	   	    		.attr("viewBox", "0 0 " + width + " " + height)
+	     	   	    		.attr("preserveAspectRatio", "xMidYMid");
+    
     var tooltip = d3.select('body').append('div')
             	            .attr('class', 'tooltip')
             	            .style('opacity', 1e-6);
@@ -625,7 +640,8 @@ function drawFunnelPlot(data, title, width, height, selector) {
        .attr('y', 30)
        .attr('dy', '.71em')
        .style('text-anchor', 'middle')
-       .style('font-size', '14px')
+       //.style('font-size', '14px')
+       .style('font-size', '11px')
        .text(title.xAxis);
 
     // draw y-axis
@@ -639,7 +655,8 @@ function drawFunnelPlot(data, title, width, height, selector) {
        .attr('x', -(height / 4))
        .attr('dy', '.71em')
        .style('text-anchor', 'end')
-       .style('font-size', '14px')
+       //.style('font-size', '14px')
+       .style('font-size', '11px')
        .text(title.yAxis);
 
     // draw title
@@ -647,7 +664,9 @@ function drawFunnelPlot(data, title, width, height, selector) {
 	   .attr("x", width / 2)
 	   .attr("y", 0 + (margin.top / 2))
 	   .attr("text-anchor", "middle")
-	   .style("font-size", '18px')
+	   //.style("font-size", '18px')
+	   .style("font-size", '14px')
+       .style("font-weight", "bold")
 	   .text(title.chartTitle);
 
 
@@ -731,9 +750,9 @@ function drawFunnelPlot(data, title, width, height, selector) {
        //.attr("fill", function (d) { return (d['hid'] == global_hid ? "rgba(236, 122, 8, 0.75)" : "rgba(22, 68, 81, 0.6)"); })
        .attr("fill", function (d) {
              var val = d['ratio'];
-             if (d['hid'] == global_hid) return "rgba(236, 122, 8, 0.75)";
-             else if (val > d['plus_3sd'] || val < d['minus_3sd']) return "rgba(255, 0, 0, 0.75)";
-             else if (val > d['plus_2sd'] || val < d['minus_2sd']) return "rgba(205, 0, 0, 0.75)";
+             if (d['hid'] == global_hid) return "rgba(236, 122, 8, 0.6)";
+             else if (val > d['plus_3sd'] || val < d['minus_3sd']) return "rgba(255, 0, 0, 0.6)";
+             else if (val > d['plus_2sd'] || val < d['minus_2sd']) return "rgba(205, 205, 0, 0.6)";
              else return "rgba(22, 68, 81, 0.6)";
        })
        .attr("cx", function (d) {
@@ -986,6 +1005,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
         var stdev = Math.sqrt(variance);
 
         var ucl = avg + (3 * stdev);
+        if (typeof indicatorVal !== "number" && ucl > 100) ucl = 100;   // assumes ucl is a percentage
         var lcl = avg - (3 * stdev);
         if (lcl < 0) lcl = 0;       // assumes lcl cannot be negative
 

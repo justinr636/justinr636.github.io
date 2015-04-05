@@ -47,10 +47,11 @@
 		</style>
     </head>
     <body>
-        <div id="#main">
+      <div id="#main">
         <span id="hidden-span" style="display:none;"></span>
+        <div id="print-area"></div>
 <!-- Nav Bar Start -->
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div id="navbar-container" class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <a class="navbar-brand" href="#">
@@ -83,24 +84,34 @@
 <!-- Home Tab Start -->
         <div id="home-tab" class="container tab">
 			<div class="row">
-			    <div class="col-md-12">
-                    <h3>Upload a CSV File to Begin!</h3>
-                    <br />
+			    <div class="col-md-6">
+                    <h3>Upload a CSV file to begin:</h3>
+                    &emsp; &emsp;
                     <input type="file" id="csvfile" />
 			    </div>
+			    <div class="col-md-6">
+			    </div>
+			</div>
+			<div class="row">
+                <br />
+                <br /><br />
 			</div>
 			<div id="select-hid-row" class="row" style="display:none;">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h4>Select Your Hospital ID:</h4>
                     <select id="hidSelect"></select>
 			    </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h4>Select A Date Range:</h4>
                     <div class="date-toggle">
                         Start:&emsp;<input class="date-toggle-start" type="text" />
-                        <br />
+                        <br /><br />
                         End: &emsp;<input class="date-toggle-end" type="text" />
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <br /><br />
+                    <input id="create-submit" type="submit" value="Create Reports" />
                 </div>
 			</div>
     	        <!--
@@ -116,6 +127,7 @@
 
 <!-- Local Tab Start -->
         <div id="local-tab" class="container print-container tab">
+            <!--
             <div class="row">
     		    <div class="col-md-6">
     		        <div class="chart-container">
@@ -180,12 +192,76 @@
     				</div>
     		    </div>
     		</div>
+            -->
+            <table class="print-area">
+                <tr>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="0" />
+    					    <div id="localChartDiv1" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                Start: <input class="date-toggle-start" type="text" />
+                                &emsp;
+                                End: <input class="date-toggle-end" type="text" />
+                                &emsp;
+                                <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="1" />
+    					    <div id="localChartDiv2" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                Start: <input class="date-toggle-start" type="text" />
+                                &emsp;
+                                End: <input class="date-toggle-end" type="text" />
+                                &emsp;
+                                <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="2" />
+    					    <div id="localChartDiv3" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                Start: <input class="date-toggle-start" type="text" />
+                                &emsp;
+                                End: <input class="date-toggle-end" type="text" />
+                                &emsp;
+                                <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="3" />
+    					    <div id="localChartDiv4" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                Start: <input class="date-toggle-start" type="text" />
+                                &emsp;
+                                End: <input class="date-toggle-end" type="text" />
+                                &emsp;
+                                <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <div class="bottom-div"></div>
     	</div>
 <!-- Local Tab End -->
 
 <!-- Regional Tab Start -->
         <div id="regional-tab" class="container print-container tab">
+            <!--
             <div class="row">
     		    <div class="col-md-6">
     		        <div class="chart-container">
@@ -250,6 +326,69 @@
     				</div>
     		    </div>
     		</div>
+            -->
+                    <table class="print-area">
+                        <tr>
+                            <td>
+                                <div class="chart-container">
+                                    <input class="chart-options-index" type="hidden" value="4" />
+    				               	<div id="regionChartDiv1" class="chartDiv"></div>
+                                    <br /><br />
+                                    <div class="date-toggle no-print">
+                                          Start: <input class="date-toggle-start" type="text" />
+                                          &emsp;
+                                          End: <input class="date-toggle-end" type="text" />
+                                          &emsp;
+                                          <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="chart-container">
+                                    <input class="chart-options-index" type="hidden" value="5" />
+    				               	<div id="regionChartDiv2" class="chartDiv"></div>
+                                    <br /><br />
+                                    <div class="date-toggle no-print">
+                                          Start: <input class="date-toggle-start" type="text" />
+                                          &emsp;
+                                          End: <input class="date-toggle-end" type="text" />
+                                          &emsp;
+                                          <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="chart-container">
+                                    <input class="chart-options-index" type="hidden" value="6" />
+    				                <div id="regionChartDiv3" class="chartDiv"></div>
+                                    <br /><br />
+                                    <div class="date-toggle no-print">
+                                          Start: <input class="date-toggle-start" type="text" />
+                                          &emsp;
+                                          End: <input class="date-toggle-end" type="text" />
+                                          &emsp;
+                                          <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="chart-container">
+                                    <input class="chart-options-index" type="hidden" value="7" />
+    				                <div id="regionChartDiv4" class="chartDiv"></div>
+                                    <br /><br />
+                                    <div class="date-toggle no-print">
+                                        Start: <input class="date-toggle-start" type="text" />
+                                        &emsp;
+                                        End: <input class="date-toggle-end" type="text" />
+                                        &emsp;
+                                        <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
             <div class="bottom-div"></div>
     	</div>
 <!-- Regional Tab End -->
@@ -388,7 +527,7 @@
 		</div>
 <!-- Customize Tab End -->
 
-    </div>
+  </div>
 	<script type="text/javascript">
 	    $(document).ready(function () {
 	        var $homeTab = $("#home-tab");
@@ -509,11 +648,12 @@
             $homeTab.find(".date-toggle-end").val(DateToString3(END_DATE));
 
 
-	        $("#hidSelect").change(function () {
+	        $("#create-submit").click(function (e) {
 	            // hospitalID Select Change Handler --- (Possibly Create submit button to prevent accidental change)
 	            // -    Set Global Hospital ID  
 	            // -	Create Local and Regional Charts
-	            global_hid = parseInt($(this).val());
+                e.preventDefault();
+	            global_hid = parseInt($("#hidSelect").val());
                 START_DATE = new Date($homeTab.find(".date-toggle-start").val());
                 START_DATE.setHours(0, 0, 0, 0);
                 END_DATE = new Date($homeTab.find(".date-toggle-end").val());
@@ -548,9 +688,10 @@
                 var opts = chartOptions[0];
                 
 	            // Local Report - Draw Avg Length of Stay vs Time - Run Chart
+                drawChart(opts);
+                /*
                 drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                              opts.titles, opts.width, opts.height, opts.selector);
-                /*
 	            // Local Report - Draw Avg Length of Stay vs Time - Run Chart
                 drawRunChart(customizeCSVData({ chartType: 1, byMonth: true, indicator: 0, hids: [global_hid] }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE),
                              { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
@@ -576,10 +717,12 @@
                 opts = chartOptions[1];
                                    
 	            // Local Report - Draw % Receiving Pharm Treatment Over Time - Run Chart
+                drawChart(opts);
+                
+                /*
                 drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                              opts.titles, opts.width, opts.height, opts.selector);
                              
-                /*
 	            Y_COL = 63;     // Validate 63 = index of 'Receiving Pharmacology Treatment' column of CSV
 	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
 	            // Local Report - Draw % Receiving Pharm Treatment Over Time - Run Chart
@@ -607,10 +750,12 @@
                 opts = chartOptions[2];
                 
 	            // Local Report - Draw % Receiving Breast Milk vs Time - Run
+                drawChart(opts);
+                
+                /*
                 drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                              opts.titles, opts.width, opts.height, opts.selector);
                 
-                /*
 	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
 	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
                                    
@@ -639,9 +784,11 @@
                 opts = chartOptions[3];
                 
 	            // Local Report - Draw % of Patients Discharged with Meds vs Time - Run Chart
+                drawChart(opts);
+                
+                /*
                 drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                              opts.titles, opts.width, opts.height, opts.selector);
-                /*
                 chartOptions.push({});
                 
 	            //Y_COL = 89;     // Validate 89 = index of 'Patients discharted with meds' column of CSV
@@ -660,38 +807,6 @@
                 
                 // Store all data to redraw chart if date is changed.
                 chartOptions.push({
-                    options: { chartType: 3, byMonth: true, indicator: "Yes" },
-                    Y_COL: 63,
-                    X_COL: 1,
-                    HID_COL: HID_COL,
-                    START_DATE: START_DATE,
-                    END_DATE: END_DATE,
-                    titles: { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
-                    width: width / 2 + margin.left,
-                    height: (3 * height) / 4 - margin.top - margin.bottom,
-                    selector: "div#regionChartDiv1"
-                });
-                
-                opts = chartOptions[4];
-                
-	            // Regional Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
-                drawFunnelPlot(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
-                               opts.titles, opts.width, opts.height, opts.selector);
-                                   
-                /*
-	            Y_COL = 63;     // Validate 63 = index of 'Receiving Pharmacology Treatment' column of CSV
-	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
-
-	            // Regional Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
-                drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: "Yes" }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
-                             { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
-                             width,
-                             (2 * height / 3) - margin.top - margin.bottom,
-                             "div#regionChartDiv1");
-                */
-
-                // Store all data to redraw chart if date is changed.
-                chartOptions.push({
                     options: { chartType: 1, byMonth: true, indicator: 0, hids: hids },
                     Y_COL: 77,
                     X_COL: 1,
@@ -699,18 +814,24 @@
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
                     titles: { yAxis: "Length of Stay (# of days)", xAxis: "", chartTitle: "Length of Stay over Time - (12 mo.)" },
-                    width: width / 2,
-                    height: (2 * height) / 3 - margin.top - margin.bottom,
-                    selector: "div#regionChartDiv2"
+                    //width: width / 2,
+                    //height: (2 * height) / 3 - margin.top - margin.bottom,
+                    //width: 450 - margin.left,
+                    //height: 250 - margin.top - margin.bottom,
+                    width: width-510 - margin.left,
+                    height: height/2 - margin.top - margin.bottom,
+                    selector: "div#regionChartDiv1"
                 });
                 
-                opts = chartOptions[5];
+                opts = chartOptions[4];
                 
 	            // Regional Report - Draw Avg Length of Stay vs Time - Run Chart
+                drawChart(opts);
+                
+                /*
                 drawRunChart(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                              opts.titles, opts.width, opts.height, opts.selector);
                              
-                /*
 	            Y_COL = 77;     // Validate 77 = index of 'Length of Stay' column of CSV
 	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
                                    
@@ -725,24 +846,69 @@
                 // Store all data to redraw chart if date is changed.
                 chartOptions.push({
                     options: { chartType: 3, byMonth: true, indicator: "Yes" },
+                    Y_COL: 63,
+                    X_COL: 1,
+                    HID_COL: HID_COL,
+                    START_DATE: START_DATE,
+                    END_DATE: END_DATE,
+                    titles: { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
+                    //width: width / 2 + margin.left,
+                    //height: (3 * height) / 4 - margin.top - margin.bottom,
+                    //width: 450 + margin.left,
+                    //height: 250,
+                    width: width-510 + margin.left,
+                    height: height/2,
+                    selector: "div#regionChartDiv2"
+                });
+                
+                opts = chartOptions[5];
+                
+	            // Regional Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
+                drawChart(opts);
+                
+                /*
+                drawFunnelPlot(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
+                               opts.titles, opts.width, opts.height, opts.selector);
+                                   
+	            Y_COL = 63;     // Validate 63 = index of 'Receiving Pharmacology Treatment' column of CSV
+	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
+
+	            // Regional Report - Draw % Patients Receiving Pharmacology Treatment - Funnel Plot
+                drawFunnelPlot(customizeCSVData({ chartType: 3, byMonth: true, indicator: "Yes" }, Y_COL, X_COL, HID_COL, START_DATE, END_DATE, true),
+                             { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
+                             width,
+                             (2 * height / 3) - margin.top - margin.bottom,
+                             "div#regionChartDiv1");
+                */
+
+                
+                // Store all data to redraw chart if date is changed.
+                chartOptions.push({
+                    options: { chartType: 3, byMonth: true, indicator: "Yes" },
                     Y_COL: 49,
                     X_COL: 1,
                     HID_COL: HID_COL,
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
                     titles: { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk - Funnel Plot (All History)" },
-                    width: width / 2 + margin.left,
-                    height: (3 * height) / 4 - margin.top - margin.bottom,
+                    //width: width / 2 + margin.left,
+                    //height: (3 * height) / 4 - margin.top - margin.bottom,
+                    //width: 450 + margin.left,
+                    //height: 250,
+                    width: width-510 + margin.left,
+                    height: height/2,
                     selector: "div#regionChartDiv3"
                 });
                 
                 opts = chartOptions[6];
                 
 	            // Regional Report - Draw % Patients Receiving Breast Milk - Funnel Plot
+                drawChart(opts);
+                
+                /*
                 drawFunnelPlot(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                                opts.titles, opts.width, opts.height, opts.selector);
                                    
-                /*
 	            Y_COL = 49;     // Validate 49 = index of 'Receive mothers own milk' column of CSV
 	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
 
@@ -763,18 +929,24 @@
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
                     titles: { yAxis: "Patients Discharged with Meds (%)", xAxis: "Population", chartTitle: "% Patients Discharged with Medication - Funnel Plot (All History)" },
-                    width: width / 2 + margin.left,
-                    height: (3 * height) / 4 - margin.top - margin.bottom,
+                    //width: width / 2 + margin.left,
+                    //height: (3 * height) / 4 - margin.top - margin.bottom,
+                    //width: 450 + margin.left,
+                    //height: 250,
+                    width: width-510 + margin.left,
+                    height: height/2,
                     selector: "div#regionChartDiv4"
                 });
                 
                 opts = chartOptions[7];
                 
 	            // Regional Report - Draw % Patients Discharged With Meds- Funnel Plot
+                drawChart(opts);
+                
+                /*
                 drawFunnelPlot(customizeCSVData(opts.options, opts.Y_COL, opts.X_COL, opts.HID_COL, opts.START_DATE, opts.END_DATE),
                                opts.titles, opts.width, opts.height, opts.selector);
                                
-                /*
 	            Y_COL = 78;     // Validate 78 = index of 'Patients discharted with meds' column of CSV
 	            X_COL = 1;      // Validate 1 = index of 'Date of Audit' column of CSV
 
@@ -860,16 +1032,17 @@
                              "div#regionChartDiv2");
                  */
 
-	            $("ul.nav li:nth-child(3)").click();
+	            $("ul.nav li:nth-child(2)").click();
 	        });
 
 	        // Click Print Button to Print the Report
 	        $("#printBtn").click(function () {
 	            var index = $("ul.nav > li.selected").index();
-	            if (index == 1 || index == 2)
-	                $tabs[index].printArea();
-	            else
+	            if (index == 1 || index == 2) {
+                    $tabs[index].printArea();
+                } else {
 	                $tabs[index].find(".print-container").printArea();
+                }
 
 	            return false;
 	        });
