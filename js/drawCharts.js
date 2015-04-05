@@ -367,10 +367,24 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	                    .attr("x", width / 2)
 	                    .attr("y", 0 - (margin.top / 2))
 	                    .attr("text-anchor", "middle")
+                        .attr("class", "no-data")
 	                    //.style("font-size", '18px')
 	                    .style("font-size", "14px")
 	                    .style("font-weight", "bold")
 	                    .text(label.chartTitle);
+   
+   if ((ucl == lcl && ucl == 0) || isNaN(ucl)) {
+       svg.append('text')
+          .attr("x", width / 2)
+          .attr("y", height / 2)
+          .attr("text-anchor", "middle")
+          .attr("class", "no-data")
+          .style("font-size", "20px")
+          .text("No Data Available");
+       
+       $(selector + " svg g :not(.no-data)").hide();
+       $(selector).closest('.chart-container').find('.date-toggle').hide();
+   }
     
     if (data.length >= 2) {
         var legend = svg;
@@ -751,8 +765,8 @@ function drawFunnelPlot(data, title, width, height, selector) {
        .attr("fill", function (d) {
              var val = d['ratio'];
              if (d['hid'] == global_hid) return "rgba(236, 122, 8, 0.6)";
-             else if (val > d['plus_3sd'] || val < d['minus_3sd']) return "rgba(255, 0, 0, 0.6)";
-             else if (val > d['plus_2sd'] || val < d['minus_2sd']) return "rgba(205, 205, 0, 0.6)";
+             //else if (val > d['plus_3sd'] || val < d['minus_3sd']) return "rgba(255, 0, 0, 0.6)";
+             //else if (val > d['plus_2sd'] || val < d['minus_2sd']) return "rgba(205, 205, 0, 0.6)";
              else return "rgba(22, 68, 81, 0.6)";
        })
        .attr("cx", function (d) {

@@ -14,7 +14,8 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         -->
         <meta name="viewport" content="width=device-width" />
-
+        
+        <link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
         <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="./css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
         <link href="./css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
@@ -43,7 +44,10 @@
 			.tab { height: 100%; }
 			.hidden { display: none; }
 			.chart-container { margin-left: auto; margin-right: auto; }
-			svg:not(:root) { overflow: visible; }
+            svg:not(:root) { overflow: visible; }
+			/*
+            svg:not(:root) { overflow: visible; }
+            */
 		</style>
     </head>
     <body>
@@ -99,19 +103,24 @@
 			<div id="select-hid-row" class="row" style="display:none;">
                 <div class="col-md-3">
                     <h4>Select Your Hospital ID:</h4>
+                    <br /> <br />
                     <select id="hidSelect"></select>
 			    </div>
                 <div class="col-md-3">
                     <h4>Select A Date Range:</h4>
                     <div class="date-toggle">
+                        <br />
                         Start:&emsp;<input class="date-toggle-start" type="text" />
                         <br /><br />
                         End: &emsp;<input class="date-toggle-end" type="text" />
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <br /><br />
-                    <input id="create-submit" type="submit" value="Create Reports" />
+                <div class="col-md-4">
+                    <h4>Create Reports:</h4>
+                    <br /> <br />
+                    <input id="create-submit" type="submit" value="Submit" />
+                </div>
+                <div class="col-md-4">
                 </div>
 			</div>
     	        <!--
@@ -127,72 +136,6 @@
 
 <!-- Local Tab Start -->
         <div id="local-tab" class="container print-container tab">
-            <!--
-            <div class="row">
-    		    <div class="col-md-6">
-    		        <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="0" />
-    					<div id="localChartDiv1" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                        </div>
-    				</div>
-    		    </div>
-    		    <div class="col-md-6">
-    				<div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="1" />
-    					<div id="localChartDiv2" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                        </div>
-    				</div>
-    		    </div>
-    		</div>
-    		<div class="row">
-    		    <br /><br />
-    		    <br /><br />
-    		</div>
-    		<div class="row">
-    		    <div class="col-md-6">
-    		        <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="2" />
-    					<div id="localChartDiv3" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                        </div>
-    				</div>
-    		    </div>
-    		    <div class="col-md-6">
-    			    <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="3" />
-    					<div id="localChartDiv4" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                        </div>
-    				</div>
-    		    </div>
-    		</div>
-            -->
             <table class="print-area">
                 <tr>
                     <td>
@@ -261,134 +204,68 @@
 
 <!-- Regional Tab Start -->
         <div id="regional-tab" class="container print-container tab">
-            <!--
-            <div class="row">
-    		    <div class="col-md-6">
-    		        <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="4" />
-    					<div id="regionChartDiv1" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+            <table class="print-area">
+                <tr>
+                    <td>
+                        <div class="chart-container" style="margin-left: -20px">
+                            <input class="chart-options-index" type="hidden" value="4" />
+    		               	<div id="regionChartDiv1" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print" style="margin-left: 20px">
+                                  Start: <input class="date-toggle-start" type="text" />
+                                  &emsp;
+                                  End: <input class="date-toggle-end" type="text" />
+                                  &emsp;
+                                  <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
                         </div>
-    				</div>
-    		    </div>
-    		    <div class="col-md-6">
-    		        <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="5" />
-    					<div id="regionChartDiv2" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                    </td>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="5" />
+    		               	<div id="regionChartDiv2" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                  Start: <input class="date-toggle-start" type="text" />
+                                  &emsp;
+                                  End: <input class="date-toggle-end" type="text" />
+                                  &emsp;
+                                  <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
                         </div>
-    				</div>
-    		    </div>
-    		</div>
-    		<div class="row">
-    		    <br /><br />
-    		    <br /><br />
-    		</div>
-    		<div class="row">
-    		    <div class="col-md-6">
-    		        <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="6" />
-    					<div id="regionChartDiv3" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="6" />
+    		                <div id="regionChartDiv3" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                  Start: <input class="date-toggle-start" type="text" />
+                                  &emsp;
+                                  End: <input class="date-toggle-end" type="text" />
+                                  &emsp;
+                                  <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
                         </div>
-    				</div>
-    		    </div>
-    		    <div class="col-md-6">
-    		        <div class="chart-container">
-                        <input class="chart-options-index" type="hidden" value="7" />
-    					<div id="regionChartDiv4" class="chartDiv"></div>
-                        <br /><br />
-                        <div class="date-toggle">
-                            Start: <input class="date-toggle-start" type="text" />
-                            &emsp;
-                            End: <input class="date-toggle-end" type="text" />
-                            &emsp;
-                            <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                    </td>
+                    <td>
+                        <div class="chart-container">
+                            <input class="chart-options-index" type="hidden" value="7" />
+    		                <div id="regionChartDiv4" class="chartDiv"></div>
+                            <br /><br />
+                            <div class="date-toggle no-print">
+                                Start: <input class="date-toggle-start" type="text" />
+                                &emsp;
+                                End: <input class="date-toggle-end" type="text" />
+                                &emsp;
+                                <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
+                            </div>
                         </div>
-    				</div>
-    		    </div>
-    		</div>
-            -->
-                    <table class="print-area">
-                        <tr>
-                            <td>
-                                <div class="chart-container">
-                                    <input class="chart-options-index" type="hidden" value="4" />
-    				               	<div id="regionChartDiv1" class="chartDiv"></div>
-                                    <br /><br />
-                                    <div class="date-toggle no-print">
-                                          Start: <input class="date-toggle-start" type="text" />
-                                          &emsp;
-                                          End: <input class="date-toggle-end" type="text" />
-                                          &emsp;
-                                          <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="chart-container">
-                                    <input class="chart-options-index" type="hidden" value="5" />
-    				               	<div id="regionChartDiv2" class="chartDiv"></div>
-                                    <br /><br />
-                                    <div class="date-toggle no-print">
-                                          Start: <input class="date-toggle-start" type="text" />
-                                          &emsp;
-                                          End: <input class="date-toggle-end" type="text" />
-                                          &emsp;
-                                          <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="chart-container">
-                                    <input class="chart-options-index" type="hidden" value="6" />
-    				                <div id="regionChartDiv3" class="chartDiv"></div>
-                                    <br /><br />
-                                    <div class="date-toggle no-print">
-                                          Start: <input class="date-toggle-start" type="text" />
-                                          &emsp;
-                                          End: <input class="date-toggle-end" type="text" />
-                                          &emsp;
-                                          <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="chart-container">
-                                    <input class="chart-options-index" type="hidden" value="7" />
-    				                <div id="regionChartDiv4" class="chartDiv"></div>
-                                    <br /><br />
-                                    <div class="date-toggle no-print">
-                                        Start: <input class="date-toggle-start" type="text" />
-                                        &emsp;
-                                        End: <input class="date-toggle-end" type="text" />
-                                        &emsp;
-                                        <input value="Refresh" class="refresh-data-btn btn btn-default" type="submit" />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    </td>
+                </tr>
+            </table>
             <div class="bottom-div"></div>
     	</div>
 <!-- Regional Tab End -->
@@ -423,7 +300,7 @@
 		             <div class="col-md-3">
 		                 <select id="simpleChartTypeDrop" class="form-control">
 		                     <option value="0">Select One</option>
-		                     <option value="1">Run Chart</option>
+		                     <option value="1">Control Chart</option>
 		                     <option value="2">Box Plot</option>
 		                     <option value="3">Funnel Plot</option>
 		                     <option value="4">Bar Chart</option>
@@ -647,6 +524,7 @@
             $homeTab.find(".date-toggle-start").val(DateToString3(START_DATE));
             $homeTab.find(".date-toggle-end").val(DateToString3(END_DATE));
 
+            $(".chart-container .date-toggle").hide();
 
 	        $("#create-submit").click(function (e) {
 	            // hospitalID Select Change Handler --- (Possibly Create submit button to prevent accidental change)
@@ -660,6 +538,7 @@
                 END_DATE.setHours(23, 59, 59, 999);
                 
 	            $(".chartDiv").empty();
+                $(".chart-container .date-toggle").show();
                 chartOptions.length = 0;
 
 	            var X_COL_MULT = [];
@@ -804,6 +683,9 @@
                 */
 
                 var hids = [global_hid, 0];     // 0 = calculate total average
+                if (global_hid == 0) {
+                    hids = [0];
+                }
                 
                 // Store all data to redraw chart if date is changed.
                 chartOptions.push({
@@ -1032,7 +914,11 @@
                              "div#regionChartDiv2");
                  */
 
-	            $("ul.nav li:nth-child(2)").click();
+                if (global_hid == 0) {
+                    $("ul.nav li:nth-child(3)").click();
+                } else {
+                    $("ul.nav li:nth-child(2)").click();
+                }
 	        });
 
 	        // Click Print Button to Print the Report

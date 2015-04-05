@@ -13,6 +13,14 @@ html, body {
     padding-top: 60px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+a, p, div {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 @media print
 {
     .no-print, .no-print *
@@ -20,7 +28,13 @@ html, body {
         display: none !important;
     }
     
+    /*
     svg, svg *
+    {
+        overflow: visible !important;
+    }
+    */
+    svg:not(:root)
     {
         overflow: visible !important;
     }
@@ -43,11 +57,11 @@ nav { background-image: #fff !important; }
 	        #navbar-items { position: absolute; left: 115px; }
 
             ul.nav li { height: 59px; }
-                ul.nav li a { height: 100%; }
-            ul.nav li.selected  { background-image: -webkit-linear-gradient(top, #fff 0%, #ec7a08 100%); background-image: -moz-linear-gradient(top, #fff 0%, #ec7a08 100%); background-image: linear-gradient(top, #fff 0%, #ec7a08 100%); border-radius: 0px 0px 8px 8px; }
+                ul.nav li a { height: 100%; margin-top: 4px; }
+            ul.nav li.selected  { background-image: -webkit-linear-gradient(top, #fff 0%, #ec7a08 100%); background-image: -moz-linear-gradient(top, #fff 0%, #ec7a08 100%); background-image: linear-gradient(top, #fff 0%, #ec7a08 100%); border-radius: 5px; }
                 ul.nav li.selected a { color: Black; }
-            #printBtn { background-image: -webkit-linear-gradient(top, #fff 0%, #003591 100%); background-image: -moz-linear-gradient(top, #fff 0%, #003591 100%); background-image: linear-gradient(top, #fff 0%, #003591 100%); border-radius: 8px 8px 8px 8px; }
-            #printBtn > a { color: White; font-weight: bold; padding-top: 36px; }
+            #printBtn { background-image: -webkit-linear-gradient(top, #fff 0%, #003591 100%); background-image: -moz-linear-gradient(top, #fff 0%, #003591 100%); background-image: linear-gradient(top, #fff 0%, #003591 100%); border-radius:5px; }
+            #printBtn > a { color: White; font-weight: bold; }
 
 .footer {
     position: fixed;
