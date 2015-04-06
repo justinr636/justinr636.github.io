@@ -118,7 +118,7 @@
                 <div class="col-md-4">
                     <h4>Create Reports:</h4>
                     <br /> <br />
-                    <input id="create-submit" type="submit" value="Submit" />
+                    <input id="create-submit" class="btn btn-default" type="submit" value="Submit" />
                 </div>
                 <div class="col-md-4">
                 </div>
@@ -135,7 +135,10 @@
 <!-- Home Tab End -->
 
 <!-- Local Tab Start -->
-        <div id="local-tab" class="container print-container tab">
+        <div id="local-tab" class="container print-container tab print-report">
+            <div class="only-print">
+                <h5 style="text-align: center">My Hospital Report</h5>
+            </div>
             <table class="print-area">
                 <tr>
                     <td>
@@ -203,15 +206,18 @@
 <!-- Local Tab End -->
 
 <!-- Regional Tab Start -->
-        <div id="regional-tab" class="container print-container tab">
+        <div id="regional-tab" class="container print-container tab print-report">
+            <div class="only-print">
+                <h5 style="text-align: center">State Report</h5>
+            </div>
             <table class="print-area">
                 <tr>
                     <td>
-                        <div class="chart-container" style="margin-left: -20px">
+                        <div class="chart-container" style="margin-left: 20px">
                             <input class="chart-options-index" type="hidden" value="4" />
     		               	<div id="regionChartDiv1" class="chartDiv"></div>
                             <br /><br />
-                            <div class="date-toggle no-print" style="margin-left: 20px">
+                            <div class="date-toggle no-print" style="margin-left: -24px">
                                   Start: <input class="date-toggle-start" type="text" />
                                   &emsp;
                                   End: <input class="date-toggle-end" type="text" />
@@ -733,7 +739,7 @@
                     HID_COL: HID_COL,
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
-                    titles: { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (All History)" },
+                    titles: { yAxis: "Receiving Pharmacology Treatment (%)", xAxis: "Population", chartTitle: "% Patients That Receive Pharmacology Treatment - Funnel Plot (12 mo.)" },
                     //width: width / 2 + margin.left,
                     //height: (3 * height) / 4 - margin.top - margin.bottom,
                     //width: 450 + margin.left,
@@ -772,7 +778,7 @@
                     HID_COL: HID_COL,
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
-                    titles: { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk - Funnel Plot (All History)" },
+                    titles: { yAxis: "Receiving Breast Milk (%)", xAxis: "Population", chartTitle: "% Patients That Receive Breast Milk - Funnel Plot (12 mo.)" },
                     //width: width / 2 + margin.left,
                     //height: (3 * height) / 4 - margin.top - margin.bottom,
                     //width: 450 + margin.left,
@@ -810,7 +816,7 @@
                     HID_COL: HID_COL,
                     START_DATE: START_DATE,
                     END_DATE: END_DATE,
-                    titles: { yAxis: "Patients Discharged with Meds (%)", xAxis: "Population", chartTitle: "% Patients Discharged with Medication - Funnel Plot (All History)" },
+                    titles: { yAxis: "Patients Discharged with Meds (%)", xAxis: "Population", chartTitle: "% Patients Discharged with Medication - Funnel Plot (12 mo.)" },
                     //width: width / 2 + margin.left,
                     //height: (3 * height) / 4 - margin.top - margin.bottom,
                     //width: 450 + margin.left,
@@ -924,11 +930,21 @@
 	        // Click Print Button to Print the Report
 	        $("#printBtn").click(function () {
 	            var index = $("ul.nav > li.selected").index();
+                
+                if (index == 0) {
+                    $(".print-report").printArea();
+	            } else if (index == 1 || index == 2) {
+                    $tabs[index].printArea();
+                } else {
+	                $tabs[index].find(".print-container").printArea();
+                }
+                /*
 	            if (index == 1 || index == 2) {
                     $tabs[index].printArea();
                 } else {
 	                $tabs[index].find(".print-container").printArea();
                 }
+                */
 
 	            return false;
 	        });

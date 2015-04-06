@@ -26,3 +26,4 @@ function drawChart(opts) {
 
 var global_hid = 0;
 var global_hid_col = 105;
+var global_date_col = 1;

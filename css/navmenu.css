@@ -20,9 +20,18 @@ h1, h2, h3, h4, h5, h6 {
 a, p, div {
     font-family: 'Ubuntu', sans-serif;
 }
+    .only-print, .only-print *
+    {
+        display: none;
+    }
 
 @media print
 {
+    .only-print, .only-print *
+    {
+        display: block !important;
+    }
+    
     .no-print, .no-print *
     {
         display: none !important;
@@ -42,6 +51,17 @@ a, p, div {
     div#main
     {
         display: inline;
+    }
+    
+    .print-report
+    {
+        display: block !important;
+    }
+    
+    .print-report:not(:first-child) .only-print h5
+    {
+        page-break-before: always;
+        padding-top: 90px;
     }
 }
 

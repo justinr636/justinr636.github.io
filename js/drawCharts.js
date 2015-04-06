@@ -230,7 +230,7 @@ function drawRunChart(dataObj, label, width, height, selector) {
 	     	   	    		.attr("viewBox", "0 0 " + (width+margin.left+margin.right) + " " + (height+margin.top+margin.bottom))
 	     	   	    		.attr("preserveAspectRatio", "xMidYMid")
 	     	   				.append("g")
-	     	   				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	     	   				.attr("transform", "translate(" + (margin.left-40) + "," + margin.top + ")");
     
     var line = d3.svg.line()
                  .interpolate("linear")
@@ -1074,25 +1074,26 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
         var sample_size = 0;
         var incidences = 0;
 
-        var jsFirstDate = new Date(csvArray[0][X_COL]);
-        var firstDate = (jsFirstDate.getMonth() + 1) + "/" + jsFirstDate.getFullYear();
+        //var jsFirstDate = new Date(csvArray[0][X_COL]);
+        //var firstDate = (jsFirstDate.getMonth() + 1) + "/" + jsFirstDate.getFullYear();
+
+        //funnelData[0] = { sample_size: 0, indicator: 0, date: firstDate, ratio: 0 };
         
         _.each(allHids, function(item) {
                funnelData.push({ hid: item, sample_size: 0, indicator: 0, ratio: 0 });
         });
 
-        //funnelData[0] = { sample_size: 0, indicator: 0, date: firstDate, ratio: 0 };
-
         _.each(csvArray, function (item, i) {
             var jsDate = new Date(item[X_COL]);
-            var dte = (jsDate.getMonth() + 1) + "/" + jsDate.getFullYear();
+            //var dte = (jsDate.getMonth() + 1) + "/" + jsDate.getFullYear();
             var indicator = item[Y_COL];
             var size = funnelData.length;
             var hid = item[HID_COL];
                
             var hidIndex = $.inArray(hid, allHids);
 
-            if ((hidIndex !== -1) && (indicator !== '') && (typeof indicator !== "undefined") && (jsDate !== '') && (typeof jsDate !== "undefined")) {
+            // check if all items are defined, there is a valid hospital id, and date is within range
+            if ((hidIndex !== -1) && (jsDate >= START_DATE) && (jsDate <= END_DATE) && (indicator !== '') && (typeof indicator !== "undefined") && (jsDate !== '') && (typeof jsDate !== "undefined")) {
                
                     funnelData[hidIndex].sample_size++;
                     //if (indicator == "Yes") {       // Assumes Indicator is always Yes/No
