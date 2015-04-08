@@ -401,7 +401,7 @@ function drawRunChart(dataObj, label, width, height, selector) {
     	    		    .attr("y", 11)
     	    		    .attr("width", 18)
     	    		    .attr("height", 18)
-            .style("fill", function (d, i) { console.log("color(i / (hids.length - 1))"); return color(i / (hids.length - 1)); });
+            .style("fill", function (d, i) { return color(i / (hids.length - 1)); });
                         //.style("fill", color(i / (data.length - 1)));
     	    		    //.style("fill", ["#4682b4", "#dc1e50"]);
     	    		    //.style("fill", ["rgba(70, 130, 180, 1.0)", "rgba(220, 30, 80, 0.4)"]);
@@ -908,7 +908,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
 
             // Get Hospital ID
             var hid = item[HID_COL];
-            var hospIndex = $.inArray(parseInt(hid), hids);
+            var hospIndex = $.inArray(hid, hids);
             //var hospIndex = _.findIndex(allHids, hid);
             //var hospIndex = -1;
             //hospIndex = $.map(allHids, function (item, index) { if (item == hid) return index; });
@@ -997,7 +997,7 @@ function customizeCSVData(chartData, Y_COL, X_COL, HID_COL, START_DATE, END_DATE
             
             _.each(dataset, function (hidData) {
                    _.each(hidData, function (o) {
-                        if (o.hid !== 0) {
+                        if (o.hid !== "AVG") {
                             if (o.sample_size == 0)
                                 o.ratio = 0;
                             else
