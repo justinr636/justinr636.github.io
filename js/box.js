@@ -191,6 +191,7 @@ d3.box = function() {
 
       // Compute the tick format.
       var format = tickFormat || x1.tickFormat(8);
+      //var format = isNaN(tickFormat) && isNan(x1.tickFormat(8)) ? 0 : (tickFormat || x1.tickFormat(8));
 
       // Update box ticks.
       var boxTick = g.selectAll("text.box")
@@ -232,6 +233,7 @@ d3.box = function() {
           .duration(duration)
           .attr("y", x1)
           .style("opacity", 1);
+          //.style("opacity", 1e-6);
 	}
       whiskerTick.transition()
           .duration(duration)
